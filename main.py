@@ -1,5 +1,5 @@
-from word_list import WordList
 from gui import App
+from word_list import WordList
 
 # Getting the random word list
 words = WordList()
