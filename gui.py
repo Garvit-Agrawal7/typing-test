@@ -1,3 +1,5 @@
+import time
+
 import customtkinter as ctk
 from PIL import Image
 
@@ -34,6 +36,7 @@ class App(ctk.CTk):
         self.entry.place(x=640, y=300, anchor=ctk.CENTER)
 
         # Progress bar
+        self.progress = 0
         self.progressbar = ctk.CTkProgressBar(self, orientation="horizontal", width=600, progress_color="#F3D0D7", fg_color="#FAF9F6")
         self.progressbar.place(x=640, y=100, anchor=ctk.CENTER)
 
@@ -49,12 +52,13 @@ class App(ctk.CTk):
 
         self.schedule_function()
         self.after(2, self.start_test)
+
         self.mainloop()
 
     def update(self):
-        progress = len(self.entry.get().strip()) / len(self.words.strip())
-        self.progressbar.set(progress)
-        if progress == 1:
+        self.progress = len(self.entry.get().strip()) / len(self.words.strip())
+        self.progressbar.set(self.progress)
+        if self.progress >= 1:
             self.test.end_typing_test()
 
     def schedule_function(self):
